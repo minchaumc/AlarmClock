@@ -1,85 +1,65 @@
-# Arduino + GitHub: Quick Beginner Guide
 
-Use Git to save versions of your Arduino code and GitHub to store them online. This guide assumes your project is already connected to a GitHub repository.
+## 1. Install and sign in
+1. Download [GitHub Desktop for Windows](https://desktop.github.com/).
+2. Install and open it.
+3. Click **Sign in to GitHub.com** and complete the browser login.
+4. Confirm the name and email Git will attach to your commits.
 
-## Everyday workflow
+## 2. Clone the repository
+1. In GitHub Desktop, click **File → Clone repository**.
+2. Select the **URL** tab.
+3. Enter your repository address:
 
-### 1. Open your project folder
+   ```text
+   https://github.com/minchaumc/AlarmClock.git
+   ```
 
-Save your sketch in Arduino IDE, then open a terminal in its folder:
+4. Under **Local path**, choose where to store it on your computer.
+5. Click **Clone**.
+6. Select **Repository → Show in Explorer** to open the downloaded folder.
 
-```bash
-cd ~/Arduino/AlarmClock
-```
+## 3. Pull updates before editing
 
-Replace this example path with your actual project folder. Keep the main sketch and its folder names matching, such as `AlarmClock/AlarmClock.ino`.
+When other users commit a change to the repository, you can update their changes by "pulling" said change
 
-### 2. Check your changes
+1. Select your project under **Current repository**.
+2. Check that **Current branch** is `main`, unless your team uses another branch.
+3. Click **Fetch origin**.
+4. If the button changes to **Pull origin**, click it.
+5. Wait for it to finish before editing.
 
-```bash
-git status
-git diff
-```
+## 4. Commit your changes
 
-- `git status` lists changed and new files.
-- `git diff` shows unstaged changes to tracked files. `-` marks removed lines; `+` marks added lines. Press `q` to exit if a viewer opens.
+A commit saves a version of your selected changes **on your computer**.
 
-### 3. Stage, commit, and push
+1. Open the **Changes** tab.
+2. Click each changed file to review it. **Red** shows removed lines; **green** shows added lines.
+3. Check the files you want included.
+4. In **Summary**, describe what you changed, such as:
 
-```bash
-git add .
-git commit -m "Add snooze button"
-git push
-```
+   ```text
+   Add snooze button
+   ```
 
-- **Stage (`add`):** select changes for the next commit. `.` includes changes under the current folder, except ignored files. Review `git status` before committing.
-- **Commit:** save a snapshot locally. Use a short message describing your changes.
-- **Push:** upload your commits to GitHub.
+6. Click **Commit to main** (or the name of your current branch).
 
-To stage just one file instead:
+Your changes are now committed locally (in your computer), but **they are not uploaded yet to for other users to see**.
 
-```bash
-git add AlarmClock.ino
-```
+## 7. Push your commits
 
-Saving in Arduino IDE does not automatically commit or push. Pushing to GitHub does not upload code to your Arduino board.
+A push uploads your commits to GitHub.
 
-## First push only
+1. Click **Push origin** at the top.
+2. Wait for the upload to finish.
+3. Select **Repository → View on GitHub** to check the online version.
 
-If your branch is named `main` and the remote is already configured:
+If your push is rejected because someone else uploaded changes, fetch and pull first. If a conflict appears, resolve it with your teammate before pushing again.
 
-```bash
-git push -u origin main
-```
+## Summary
 
-| Term | Meaning |
-| --- | --- |
-| `origin` | WHERE: the nickname for your GitHub repository URL |
-| `main` | WHICH branch: your primary line of development |
-| `-u` | Remember the remote branch for future pushes and pulls |
+1. **Fetch → Pull** if updates are available.
+2. **Edit → Save** in Arduino IDE.
+3. **Review → Commit** in GitHub Desktop.
+4. **Push origin** to upload.
 
-After this, use `git push` while on `main`. You do not need to repeat `git init`, `git remote add`, or login for every update.
-
-## Working on multiple computers or with others
-
-Before making local edits, get the latest committed changes:
-
-```bash
-git pull --ff-only
-```
-
-If pulling fails or pushing is rejected, read the error before continuing. Do not force-push to bypass it; ask for help if you are unsure.
-
-## Useful checks
-
-```bash
-git status          # Current branch and file changes
-git diff --staged   # Changes selected for the next commit
-git log --oneline   # Commit history
-git remote -v      # Remote names and URLs
-git branch         # Local branches; * marks the current one
-```
-
-If Git says `nothing to commit`, save your file and check that you are in the correct folder. If it says `Everything up-to-date`, there are no new commits to upload.
-
-Never commit passwords, access tokens, or Wi-Fi credentials. Keep secrets in an ignored file.
+Saving, committing, and pushing are separate steps. Uploading the program to your Arduino board is also separate—you still do that through Arduino IDE.
